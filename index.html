@@ -1,188 +1,303 @@
 <!doctype html>
-
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Happy Birthday Mummy! 💐</title>  <!-- Fonts -->  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;600&display=swap" rel="stylesheet">  <style>
+  <title>Happy Birthday Mummy! 💐</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+
+  <style>
     :root {
       --pink1: #ffd1e6;
       --pink2: #ff9fcf;
     }
 
     html, body {
-      height:100%;
-      margin:0;
+      height: 100%;
+      margin: 0;
       font-family: 'Poppins', sans-serif;
-      overflow:hidden;
+      overflow: hidden;
       background: linear-gradient(135deg, var(--pink1), var(--pink2));
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
 
     h1 {
-      font-size:4rem;
-      margin:0;
-      color:#fff;
-      text-shadow:0 0 10px #fff,0 0 20px #ff69b4;
-      animation:glow 2s ease-in-out infinite alternate;
-      text-align:center;
+      font-size: 4rem;
+      margin: 0;
+      color: #fff;
+      text-shadow: 0 0 10px #fff, 0 0 20px #ff69b4;
+      animation: glow 2s ease-in-out infinite alternate;
+      text-align: center;
       font-family: 'Dancing Script', cursive;
     }
 
     @keyframes glow {
-      from { text-shadow:0 0 10px #fff,0 0 20px #ff69b4; }
-      to   { text-shadow:0 0 20px #fff,0 0 40px #ff1493; }
+      from {
+        text-shadow: 0 0 10px #fff, 0 0 20px #ff69b4;
+      }
+      to {
+        text-shadow: 0 0 20px #fff, 0 0 40px #ff1493;
+      }
     }
 
     .emoji-fall {
-      position:fixed;
-      top:0; left:0; right:0; bottom:0;
-      pointer-events:none;
-      overflow:hidden;
-      z-index:4;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 4;
     }
 
     .emoji {
-      position:absolute;
-      top:-10vh;
-      font-size:30px;
-      animation:fall linear infinite;
+      position: absolute;
+      top: -10vh;
+      font-size: 30px;
+      animation: fall linear infinite;
     }
 
     @keyframes fall {
-      to { transform:translateY(110vh) rotate(360deg); }
+      to {
+        transform: translateY(110vh) rotate(360deg);
+      }
     }
 
     canvas {
-      position:fixed;
-      left:0; top:0;
-      width:100%; height:100%;
-      z-index:6;
-      pointer-events:none;
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 6;
+      pointer-events: none;
     }
 
     .card {
-      z-index:5;
-      padding:25px 30px;
-      border-radius:20px;
-      backdrop-filter:blur(10px);
-      background:rgba(255,255,255,0.1);
-      box-shadow:0 4px 30px rgba(0,0,0,0.1);
-      text-align:center;
+      z-index: 5;
+      padding: 25px 30px;
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      text-align: center;
     }
 
     .btn {
-      margin-top:15px;
-      padding:12px 25px;
-      border:none;
-      border-radius:30px;
-      background:#fff;
-      color:#ff69b4;
-      font-weight:600;
-      cursor:pointer;
-      font-size:1rem;
-      transition:transform 0.2s;
+      margin-top: 15px;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 30px;
+      background: #fff;
+      color: #ff69b4;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: transform 0.2s;
     }
 
     .btn:hover {
-      transform:scale(1.05);
+      transform: scale(1.05);
     }
 
     .message {
-      margin-top:20px;
-      font-family:'Dancing Script', cursive;
-      font-size:1.7rem;
-      color:#fff;
-      white-space:pre-wrap;
-      overflow:hidden;
-      text-shadow:0 0 5px #fff;
+      margin-top: 20px;
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.7rem;
+      color: #fff;
+      white-space: pre-wrap;
+      overflow: hidden;
+      text-shadow: 0 0 5px #fff;
     }
 
-    @media(max-width:600px) {
-      h1 { font-size:2.5rem; }
-      .message { font-size:1.2rem; }
-    }
-  </style></head>
-<body>  <!-- Falling Emojis -->  <div class="emoji-fall" id="emojiLayer"></div>  <!-- Confetti --><canvas id="confetti"></canvas>
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2.5rem;
+      }
 
-  <!-- Birthday Card -->  <div class="card">
+      .message {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Falling Emojis -->
+  <div class="emoji-fall" id="emojiLayer"></div>
+
+  <!-- Confetti -->
+  <canvas id="confetti"></canvas>
+
+  <!-- Birthday Card -->
+  <div class="card">
     <h1>Happy Birthday Mummy! 💐</h1>
-    <button class="btn" id="revealBtn">Click here</button>
+
+    <button class="btn" id="revealBtn">
+      Click here
+    </button>
+
     <div id="message" class="message"></div>
-  </div>  <!-- Background Music -->  <audio id="bgMusic" loop autoplay>
-    <source src="solarflex-happy-birthday-588990.mp3" type="audio/mpeg">
-  </audio>  <script>
+  </div>
+
+  <!-- Background Music -->
+  <audio id="bgMusic" loop>
+    <source src="song.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+
     // Falling emojis
-    const emojis = ["☺️","😊","😍","😘","🤗","💖","💝","💐","💞","💕","💓","💜","💛","🫶"];
-    function createEmojis(){
+    const emojis = [
+      "☺️", "😊", "😍", "😘",
+      "🤗", "💖", "💝", "💐",
+      "💞", "💕", "💓", "💜",
+      "💛", "🫶"
+    ];
+
+    function createEmojis() {
       const layer = document.getElementById('emojiLayer');
-      for (let i=0; i<40; i++){
+
+      for (let i = 0; i < 40; i++) {
         const e = document.createElement('div');
+
         e.className = 'emoji';
-        e.innerText = emojis[Math.floor(Math.random()*emojis.length)];
-        e.style.left = Math.random()*100 + '%';
-        e.style.animationDuration = (6 + Math.random()*5) + 's';
-        e.style.animationDelay = (Math.random()*5) + 's';
+        e.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+
+        e.style.left = Math.random() * 100 + '%';
+        e.style.animationDuration = (6 + Math.random() * 5) + 's';
+        e.style.animationDelay = (Math.random() * 5) + 's';
+
         layer.appendChild(e);
       }
     }
 
+
     // Confetti effect
-    function confetti(){
+    function confetti() {
+
       const canvas = document.getElementById('confetti');
       const ctx = canvas.getContext('2d');
+
       let w = canvas.width = innerWidth;
       let h = canvas.height = innerHeight;
-      window.addEventListener('resize', () => { w = canvas.width = innerWidth; h = canvas.height = innerHeight; });
+
+      window.addEventListener('resize', () => {
+        w = canvas.width = innerWidth;
+        h = canvas.height = innerHeight;
+      });
+
       const conf = [];
-      for (let i=0; i<150; i++){
+
+      for (let i = 0; i < 150; i++) {
+
         conf.push({
-          x: Math.random()*w,
-          y: Math.random()*h,
-          dx: Math.random()*2 - 1,
-          dy: Math.random()*3 + 2,
-          color: `hsl(${Math.random()*360},100%,70%)`,
-          size: Math.random()*6 + 2
+          x: Math.random() * w,
+          y: Math.random() * h,
+          dx: Math.random() * 2 - 1,
+          dy: Math.random() * 3 + 2,
+          color: `hsl(${Math.random() * 360},100%,70%)`,
+          size: Math.random() * 6 + 2
         });
+
       }
-      function draw(){
-        ctx.clearRect(0,0,w,h);
+
+      function draw() {
+
+        ctx.clearRect(0, 0, w, h);
+
         conf.forEach(c => {
+
           ctx.fillStyle = c.color;
           ctx.fillRect(c.x, c.y, c.size, c.size);
+
           c.x += c.dx;
           c.y += c.dy;
-          if (c.y > h) { c.y = -10; c.x = Math.random()*w; }
+
+          if (c.y > h) {
+            c.y = -10;
+            c.x = Math.random() * w;
+          }
+
         });
+
         requestAnimationFrame(draw);
       }
+
       draw();
     }
 
-    // Typewriter effect for message
-    function revealMessage(){
+
+    // Typewriter effect
+    function revealMessage() {
+
       const msg = document.getElementById('message');
-      const text = "Thanks for being the most sweetest and perfect mummy! You radiate positivity and prosperity comes at your call! ☺️❤️";
+
+      const text =
+        "For a very special lady 🫠😎😘
+In every storm, you were my shelter,
+In every darkness, my guiding light.
+You turned our sadness into joy,
+And made everything feel alright.
+Your hands have held so many burdens,
+Yet your smile has never ceased to shine.
+If love could take a human form,
+I know that it would look like you
+You are my comfort, my strength, my grace,
+The warmth that no one can replace.
+And if I could choose my mother again,
+I'd choose you in every life, every time. ❤️
+Happy Birthday, Mummy. 💐";
+
       msg.textContent = "";
-      let i=0;
-      function type(){
-        if (i < text.length){
+
+      let i = 0;
+
+      function type() {
+
+        if (i < text.length) {
+
           msg.textContent += text.charAt(i);
           i++;
+
           setTimeout(type, 40);
         }
       }
+
       type();
     }
 
-    // Start everything
+
+    // Start animations
     createEmojis();
     confetti();
 
-    // Optional: button can still reveal manually
-    document.getElementById('revealBtn').addEventListener('click', revealMessage);
-  </script></body>
+
+    // Button
+    document
+      .getElementById('revealBtn')
+      .addEventListener('click', function () {
+
+        revealMessage();
+
+        // Start music after user interaction
+        const music = document.getElementById('bgMusic');
+
+        music.play().catch(error => {
+          console.log("Audio could not play:", error);
+        });
+
+      });
+
+  </script>
+
+</body>
 </html>
